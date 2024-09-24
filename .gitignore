@@ -1,0 +1,13 @@
+articles
+bin
+Data
+DataBase
+include
+lib
+lib64
+quest_data
+share
+tg
+__pycache__
+.ipynb*
+.vsc*
