@@ -6,13 +6,11 @@
         }
     },
     "retrievers" : [
-        {"name" : "bm25","collection_name" : "500100", "path" : "/home/dima/RAG_project/DataBase/db_500_100", "k" : 4}
+        {"name" : "HF","collection_name" : "500100", "path" : "/home/dima/RAG_project/DataBase/db_1000_200", "k" : 4}
     ],
     "evaluation": {
-        "evaluation_name" : "1",
+        "evaluation_name" : "HF",
         "test_quest_df_path" : "./quest_data/quest_answer_context_ru_correct_2000_0_0.csv",
-        "vector_store_path" : "/home/dima/RAG_project/DataBase/db_500_10",
-        "collection_name" : "500100",
         "k" : 4
     },
     "tg_bot": {
