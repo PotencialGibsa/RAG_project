@@ -31,13 +31,13 @@ def preprocess_string(s):
     # Remove punctuation
     s = re.sub(r'[^\w\s]', '', s)
 
-    # # Detect the language of the text
-    # try:
-    #     language = detect(s)
-    # except:
-    #     language = 'None'
+    # Detect the language of the text
+    try:
+        language = detect(s)
+    except:
+        language = 'None'
 
-    return s
+    return s, language
 
 # # Example usage
 # input_string = "Hello, world! https://example.com это 12412 тестовый текст."

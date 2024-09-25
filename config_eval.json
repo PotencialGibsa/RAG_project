@@ -6,12 +6,11 @@
         }
     },
     "retrievers" : [
-        {"name" : "HF","collection_name" : "500100", "path" : "/home/dima/RAG_project/DataBase/db_1000_200", "k" : 4}
+        {"name" : "HF","collection_name" : "1000_200", "path" : "/home/dima/RAG_project/DataBase/db_noproc_ru_1000_200", "k" : 4}
     ],
     "evaluation": {
         "evaluation_name" : "HF",
-        "test_quest_df_path" : "./quest_data/quest_answer_context_ru_correct_2000_0_0.csv",
-        "k" : 4
+        "test_quest_df_path" : "./quest_data/quest_answer_context_ru_correct_2000_0_0.csv"
     },
     "tg_bot": {
         "token" : "7617208111:AAG8owpHHYyj3U4biEbwJ6NU1J3PB61WRtI",
