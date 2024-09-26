@@ -6,7 +6,8 @@
         }
     },
     "retrievers" : [
-        {"name" : "bm25","collection_name" : "500100", "path" : "/home/dima/RAG_project/DataBase/db_500_100", "k" : 4}
+        {"name" : "HF","collection_name" : "1000_200", "path" : "/home/dima/RAG_project/DataBase/db_proc_ru_1000_200", "k" : 1},
+        {"name" : "bm25","collection_name" : "1000_200", "path" : "/home/dima/RAG_project/DataBase/db_proc_ru_1000_200", "k" : 3}
     ],
     "evaluation": {
         "evaluation_name" : "1",

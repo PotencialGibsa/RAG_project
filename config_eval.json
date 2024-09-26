@@ -6,10 +6,10 @@
         }
     },
     "retrievers" : [
-        {"name" : "HF","collection_name" : "1000_200", "path" : "/home/dima/RAG_project/DataBase/db_noproc_ru_1000_200", "k" : 4}
+        {"name" : "bm25","collection_name" : "2000_400", "path" : "/home/dima/RAG_project/DataBase/db_proc_ru_2000_400", "k" : 4}
     ],
     "evaluation": {
-        "evaluation_name" : "HF",
+        "evaluation_name" : "bm25",
         "test_quest_df_path" : "./quest_data/quest_answer_context_ru_correct_2000_0_0.csv"
     },
     "tg_bot": {

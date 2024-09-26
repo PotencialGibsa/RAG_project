@@ -36,8 +36,7 @@ def handle_text_message(message):
     question = message.text
     answer = main(question, user_id, config)
         
-    bot.send_message(user_id, text = f"""This is the question:    {question}\n\n
-                     This is the answer:     {answer}""")
+    bot.send_message(user_id, text = f"""Ваш вопрос:    {question}\n\nОтвет:     {answer}""")
     sleep(2)
 
 
@@ -60,7 +59,7 @@ def handle_document(message):
 
         db_path = add_user_article(config, user_id, file_name, file_path)
         # config for main 
-        config_tg = read_config('config_tg.json')
+        config_tg = read_config('config.json')
         for r in range(len(config_tg['retrievers'])):
             config_tg['retrievers'][r]['path'] = db_path
             config_tg['retrievers'][r]['collection_name'] = str(user_id)
@@ -70,10 +69,8 @@ def handle_document(message):
         if message.caption:
             question = message.caption
             answer = main(question, user_id, config_tg)
-            print('after main')
             # Отправляем сообщение пользователю о том, что документ и текст сохранены
-            bot.send_message(user_id, text = f"""This is the question:    {question}\n\n
-                        This is the answer:     {answer}""")
+            bot.send_message(user_id, text = f"Ваш вопрос:    {question}\n\nОтвет:     {answer}")
             sleep(2)
 
     except Exception as e:

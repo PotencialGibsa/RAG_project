@@ -76,12 +76,14 @@ class Kernel():
             #self.update_history(answer, session_id, question=question)
             #return answer
         if len(chunks) != 0:
+            print('len chunks:', len(chunks))
             context = self.make_context(chunks)
         else:
             context = 'Нет контекста'
         history = self.make_history(session_id)
+        print(history)
         query = self.prompt.replace('@context@', context).replace('@history@', history).replace('@input@', question)
-        print(query)
+        #print(query)
         answer = self.llm.invoke(query).content
         self.update_history(answer, session_id, question=question)
         return(answer)

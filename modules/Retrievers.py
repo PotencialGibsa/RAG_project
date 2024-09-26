@@ -14,10 +14,11 @@ class Retrievers():
         if len(retrievers_list) == 0:
             raise "No retriever, check the config file"
         elif len(retrievers_list) == 1:
-            self.retrivier = self.create_one_retriever(retrievers_list[0])
+            self.retriever = self.create_one_retriever(retrievers_list[0])
         else:
             retrievers = [self.create_one_retriever(r) for r in retrievers_list]
-            self.retrivier = EnsembleRetriever(
+            #print("len retrievers", len(retrievers))
+            self.retriever = EnsembleRetriever(
                 retrievers=retrievers,
                 weights=[1/len(retrievers) for i in retrievers],
             )
@@ -33,12 +34,6 @@ class Retrievers():
                         persist_directory = path
                     )
         if name == 'HF':
-            model_name = "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
-            model_kwargs = {'device': 'cpu'}
-            encode_kwargs = {'normalize_embeddings': False}
-            embedding = HuggingFaceEmbeddings(model_name=model_name,
-                                            model_kwargs=model_kwargs,
-                                            encode_kwargs=encode_kwargs)
             retriever_made =  db.as_retriever(search_kwargs={"k": k})
             return retriever_made
         elif name == 'bm25':
@@ -52,7 +47,9 @@ class Retrievers():
         
 
     def invoke(self, text):
-        return self.retrivier.invoke(text)
+        #print('len invoke retriever', len(self.retriever.invoke(text)))
+        #raise 'Stop'
+        return self.retriever.invoke(text)
     
 
 if __name__ == "__main__":
