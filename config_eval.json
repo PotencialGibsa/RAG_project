@@ -13,7 +13,7 @@
         "test_quest_df_path" : "./quest_data/quest_answer_context_ru_correct_2000_0_0.csv"
     },
     "tg_bot": {
-        "token" : "7617208111:AAG8owpHHYyj3U4biEbwJ6NU1J3PB61WRtI",
+        "token" : "",
         "doc_save_dir" : "tg/tg_articles",
         "db_save_dir" : "tg/database",
         "chunk_size" : 500,
