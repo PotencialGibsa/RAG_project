@@ -2,7 +2,7 @@
     "kernel": {
         "model_name" : "GigaChat",
         "GigaChat": {
-            "credentials" : "Y2U1MzUwNTMtZGU4Ny00ZDNlLWE5OTEtNmQ3YTQ4NWMwYWU0OmQwOWUxZTViLTliOGMtNDQ4ZC1iN2NlLWYzZmE0ZjVjNzA4OA=="
+            "credentials" : ""
         }
     },
     "retrievers" : [
