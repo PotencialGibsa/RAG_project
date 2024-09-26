@@ -3,7 +3,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains.retrieval import create_retrieval_chain
 from Read_config import read_config
-from collections import deque 
+from collections import deque #!
 
 class Kernel():
     
