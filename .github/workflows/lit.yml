@@ -36,5 +36,5 @@ jobs:
         with:
                 author_name: PotencialGibsa
                 author_email: shmygol.di@phsyetech.edu
-                message: 'Improve with CICD'
+                message: 'GITHUB: Improve with CICD'
                 add: '.'

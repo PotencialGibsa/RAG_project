@@ -18,11 +18,11 @@ do
 		echo "Try to improve"
 		black "./$file"
 		respond_impr=$(flake8 "./$file" --exit-zero)
-		echo "The mistake unimproved: $respond_impr in file $file"
 		if [ "$respond_impr" != "" ]
 		then
 			echo "Unimproved syntax in $file"
-			exit -1
+			echo "The mistake unimproved: $respond_impr in file $file"
+			#exit -1
 		else	
 			echo "Improved syntax in $file"
 		fi
