@@ -1,4 +1,5 @@
 from langchain.embeddings import HuggingFaceEmbeddings
+from Text_process import preprocess_string
 
 
 def make_HF_embedding():
@@ -81,3 +82,11 @@ def delete_folder_recursively(folder_path):
                 os.rmdir(dir_path)
                 print(f"Папка '{dir_path}' удалена.")
         # Удаляем саму корневую пап
+                
+
+def make_db_proc(path_db, collection_name):
+    chroma_old = Chroma(collection_name , embedding_function = make_HF_embedding(), persist_directory=path_db)
+    chroma_new = Chroma(collection_name , embedding_function = make_HF_embedding(), persist_directory=path_db + '_proc')
+    for doc in chroma_old.get()['documents']:
+        doc = preprocess_string(doc)
+        chroma_new.add_texts([doc])

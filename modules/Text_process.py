@@ -3,6 +3,8 @@ import re
 import nltk
 from nltk.tokenize import word_tokenize
 from langdetect import detect
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
 
 
 
@@ -31,17 +33,21 @@ def preprocess_string(s):
     # Remove punctuation
     s = re.sub(r'[^\w\s]', '', s)
 
-    # Detect the language of the text
-    try:
-        language = detect(s)
-    except:
-        language = 'None'
+    return s
 
-    return s, language
 
-# # Example usage
-# input_string = "Hello, world! https://example.com это 12412 тестовый текст."
-# preprocessed_string, language = preprocess_string(input_string)
+def del_rubbish(doc):
+    NUM_SLASH_N = 5
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=200,
+                                              chunk_overlap=0)
+    text_splitted = text_splitter.split_text(doc[0].page_content)
+    text_choosen = ''
+    for t in text_splitted:
+        if t.count('\n') <= NUM_SLASH_N:
+            text_choosen += t + ' '
+    doc[0].page_content = text_choosen
+    return doc
 
-# print("Preprocessed string:", preprocessed_string)
-# print("Language:", language)
+
+    
+

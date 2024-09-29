@@ -49,6 +49,7 @@ class Retrievers():
     def invoke(self, text):
         #print('len invoke retriever', len(self.retriever.invoke(text)))
         #raise 'Stop'
+        #print(self.retriever.invoke(text))
         return self.retriever.invoke(text)
     
 
