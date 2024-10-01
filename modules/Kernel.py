@@ -33,6 +33,16 @@ class Kernel:
                     @input@ \n
                 Ответ AI ассистента:\n
                 """
+            self.prompt_history = """
+                Ты диалоговый Ai ассистент.
+                Учитывая историю чата и вопрос пользователя
+                , который может ссылаться на контекст в истории чата, сформулируй отдельный вопрос,
+                который можно понять без истории чата. НЕ отвечай на вопрос,
+                просто переформулируй его, если необходимо, в противном случае верни вопрос неизмененным как есть.\n
+                История чата :@history@ \n 
+                Вопрос пользователя:@input@\n
+                Ответ AI ассистента:\n
+                """
         else:
             raise "Unpropper model name"
 
@@ -79,6 +89,13 @@ class Kernel:
             context = "Нет контекста"
         history = self.make_history(session_id)
         print(history)
+        ### Add reformulating question on history
+        query_history = (
+            self.prompt_history.replace("@history@", history)
+                                .replace("@input@", question)
+            )
+        question = self.llm.invoke(query_history).content
+        print('Question reformulated = ', question)
         query = (
             self.prompt.replace("@context@", context)
             .replace("@history@", history)
