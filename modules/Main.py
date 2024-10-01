@@ -10,5 +10,3 @@ def main(question, id, config):
     question = kernel.reformulate_question(question, id)
     chunks = retriever.invoke(question)
     return kernel.invoke(question, id, chunks)
-
-

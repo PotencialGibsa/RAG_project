@@ -86,27 +86,22 @@ class Kernel:
             context = self.make_context(chunks)
         else:
             context = "Нет контекста"
-                
-        query = (
-            self.prompt.replace("@context@", context)
-            .replace("@input@", question)
-        )
+
+        query = self.prompt.replace("@context@", context).replace("@input@", question)
         # print(query)
         answer = self.llm.invoke(query).content
         self.update_history(answer, session_id, question=question)
         return answer
-    
 
     def reformulate_question(self, question, session_id):
         if not self.history.get(session_id, False):
             self.history[session_id] = deque()
         history = self.make_history(session_id)
-        query_history = (
-            self.prompt_history.replace("@history@", history)
-                                .replace("@input@", question)
-            )
+        query_history = self.prompt_history.replace("@history@", history).replace(
+            "@input@", question
+        )
         question = self.llm.invoke(query_history).content
-        print('Question reformulated = ', question)
+        print("Question reformulated = ", question)
         return question
 
 
