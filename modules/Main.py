@@ -7,6 +7,7 @@ def main(question, id, config):
     retriever = Retrievers(config)
     kernel = Kernel(config)
     # pipeline
+    question = kernel.reformulate_question(question, id)
     chunks = retriever.invoke(question)
     return kernel.invoke(question, id, chunks)
 

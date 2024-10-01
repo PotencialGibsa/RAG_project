@@ -22,15 +22,24 @@ class Kernel:
                 profanity_check=False,
             )
             self.prompt = """
-                История диалога :@history@ \n 
                 Контекст: @context@ \n
                 Ты диалоговый ассистент.
                 Твоя главная задача развернуто ответить на сообщение пользователя. 
-                Ты можешь использовать для ответа только информацию из контекста и из истории диалога.
-                Если в контексте или истории диалога нет информации для ответа, проси уточнить вопрос.
+                Ты можешь использовать для ответа только информацию из контекста.
+                Если в контексте нет информации для ответа, проси уточнить вопрос.
                 \n
                 Сообщение пользователя:\n
                     @input@ \n
+                Ответ AI ассистента:\n
+                """
+            self.prompt_history = """
+                Ты диалоговый Ai ассистент.
+                Учитывая историю чата и вопрос пользователя
+                , который может ссылаться на контекст в истории чата, сформулируй отдельный вопрос,
+                который можно понять без истории чата. НЕ отвечай на вопрос,
+                просто переформулируй его, если необходимо, в противном случае верни вопрос неизмененным как есть.\n
+                История чата :@history@ \n 
+                Вопрос пользователя:@input@\n
                 Ответ AI ассистента:\n
                 """
         else:
@@ -77,17 +86,28 @@ class Kernel:
             context = self.make_context(chunks)
         else:
             context = "Нет контекста"
-        history = self.make_history(session_id)
-        print(history)
+                
         query = (
             self.prompt.replace("@context@", context)
-            .replace("@history@", history)
             .replace("@input@", question)
         )
         # print(query)
         answer = self.llm.invoke(query).content
         self.update_history(answer, session_id, question=question)
         return answer
+    
+
+    def reformulate_question(self, question, session_id):
+        if not self.history.get(session_id, False):
+            self.history[session_id] = deque()
+        history = self.make_history(session_id)
+        query_history = (
+            self.prompt_history.replace("@history@", history)
+                                .replace("@input@", question)
+            )
+        question = self.llm.invoke(query_history).content
+        print('Question reformulated = ', question)
+        return question
 
 
 if __name__ == "__main__":
