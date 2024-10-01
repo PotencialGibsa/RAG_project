@@ -90,12 +90,11 @@ class Kernel:
         history = self.make_history(session_id)
         print(history)
         ### Add reformulating question on history
-        query_history = (
-            self.prompt_history.replace("@history@", history)
-                                .replace("@input@", question)
-            )
+        query_history = self.prompt_history.replace("@history@", history).replace(
+            "@input@", question
+        )
         question = self.llm.invoke(query_history).content
-        print('Question reformulated = ', question)
+        print("Question reformulated = ", question)
         query = (
             self.prompt.replace("@context@", context)
             .replace("@history@", history)
